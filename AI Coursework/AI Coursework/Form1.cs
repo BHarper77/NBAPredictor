@@ -16,5 +16,23 @@ namespace AI_Coursework
         {
             InitializeComponent();
         }
+
+        private void submitButton_Click(object sender, EventArgs e)
+        {
+            string teamOne = teamOneDropdown.SelectedIndex.ToString();
+            string teamTwo = teamTwoDropdown.SelectedIndex.ToString();
+
+            int TeamOneW = Int32.Parse(teamOneWL.Text);
+            int teamTwoW = Int32.Parse(teamTwoWL.Text);
+
+            if (teamOneCheck.Checked)
+            {
+
+            }
+            else if (teamTwoCheck.Checked)
+            {
+
+            }
+        }
     }
 }
