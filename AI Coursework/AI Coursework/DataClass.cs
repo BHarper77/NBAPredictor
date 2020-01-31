@@ -9,7 +9,7 @@ namespace AI_Coursework
     public class teamData
     {
         string teamName;
-        double recordPercentage;
+        double offRtg, defRtg;
         Boolean home;
 
         //Setters
@@ -18,9 +18,14 @@ namespace AI_Coursework
             teamName = name;
         }
 
-        public void setRecordPercentage(double percentage)
+        public void setOffRating(double offRating)
         {
-            recordPercentage = percentage;
+            offRtg = offRating;
+        }
+
+        public void setDefRating(double defRating)
+        {
+            defRtg = defRating;
         }
 
         public void setHome(Boolean Home)
@@ -34,9 +39,14 @@ namespace AI_Coursework
             return teamName;
         }
 
-        public double getRecordPercentage()
+        public double getOffRating()
         {
-            return recordPercentage;
+            return offRtg;
+        }
+
+        public double getDefRating()
+        {
+            return defRtg;
         }
 
         public Boolean getHome()

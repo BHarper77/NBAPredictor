@@ -33,12 +33,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.teamTwoDropdown = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.teamOneWL = new System.Windows.Forms.TextBox();
-            this.teamTwoWL = new System.Windows.Forms.TextBox();
+            this.teamOneOrtg = new System.Windows.Forms.TextBox();
+            this.teamTwoOrtg = new System.Windows.Forms.TextBox();
             this.submitButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.teamOneCheck = new System.Windows.Forms.CheckBox();
             this.teamTwoCheck = new System.Windows.Forms.CheckBox();
+            this.teamTwoDrtg = new System.Windows.Forms.TextBox();
+            this.teamOneDrtg = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // teamOneDropdown
@@ -75,7 +78,7 @@
             "Toronto Raptors",
             "Utah Jazz",
             "Washington Wizards"});
-            this.teamOneDropdown.Location = new System.Drawing.Point(132, 84);
+            this.teamOneDropdown.Location = new System.Drawing.Point(201, 84);
             this.teamOneDropdown.Name = "teamOneDropdown";
             this.teamOneDropdown.Size = new System.Drawing.Size(121, 33);
             this.teamOneDropdown.TabIndex = 0;
@@ -83,7 +86,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(127, 24);
+            this.label1.Location = new System.Drawing.Point(196, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(112, 25);
             this.label1.TabIndex = 1;
@@ -140,25 +143,25 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(29, 139);
+            this.label3.Location = new System.Drawing.Point(12, 139);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 25);
+            this.label3.Size = new System.Drawing.Size(163, 25);
             this.label3.TabIndex = 5;
-            this.label3.Text = "W/L";
+            this.label3.Text = "Offensive rating";
             // 
-            // teamOneWL
+            // teamOneOrtg
             // 
-            this.teamOneWL.Location = new System.Drawing.Point(132, 132);
-            this.teamOneWL.Name = "teamOneWL";
-            this.teamOneWL.Size = new System.Drawing.Size(100, 31);
-            this.teamOneWL.TabIndex = 6;
+            this.teamOneOrtg.Location = new System.Drawing.Point(201, 133);
+            this.teamOneOrtg.Name = "teamOneOrtg";
+            this.teamOneOrtg.Size = new System.Drawing.Size(100, 31);
+            this.teamOneOrtg.TabIndex = 6;
             // 
-            // teamTwoWL
+            // teamTwoOrtg
             // 
-            this.teamTwoWL.Location = new System.Drawing.Point(493, 132);
-            this.teamTwoWL.Name = "teamTwoWL";
-            this.teamTwoWL.Size = new System.Drawing.Size(100, 31);
-            this.teamTwoWL.TabIndex = 7;
+            this.teamTwoOrtg.Location = new System.Drawing.Point(493, 132);
+            this.teamTwoOrtg.Name = "teamTwoOrtg";
+            this.teamTwoOrtg.Size = new System.Drawing.Size(100, 31);
+            this.teamTwoOrtg.TabIndex = 7;
             // 
             // submitButton
             // 
@@ -173,7 +176,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 200);
+            this.label4.Location = new System.Drawing.Point(12, 241);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(121, 25);
             this.label4.TabIndex = 9;
@@ -182,7 +185,7 @@
             // teamOneCheck
             // 
             this.teamOneCheck.AutoSize = true;
-            this.teamOneCheck.Location = new System.Drawing.Point(173, 198);
+            this.teamOneCheck.Location = new System.Drawing.Point(201, 239);
             this.teamOneCheck.Name = "teamOneCheck";
             this.teamOneCheck.Size = new System.Drawing.Size(28, 27);
             this.teamOneCheck.TabIndex = 10;
@@ -191,23 +194,49 @@
             // teamTwoCheck
             // 
             this.teamTwoCheck.AutoSize = true;
-            this.teamTwoCheck.Location = new System.Drawing.Point(493, 198);
+            this.teamTwoCheck.Location = new System.Drawing.Point(493, 239);
             this.teamTwoCheck.Name = "teamTwoCheck";
             this.teamTwoCheck.Size = new System.Drawing.Size(28, 27);
             this.teamTwoCheck.TabIndex = 12;
             this.teamTwoCheck.UseVisualStyleBackColor = true;
+            // 
+            // teamTwoDrtg
+            // 
+            this.teamTwoDrtg.Location = new System.Drawing.Point(493, 182);
+            this.teamTwoDrtg.Name = "teamTwoDrtg";
+            this.teamTwoDrtg.Size = new System.Drawing.Size(100, 31);
+            this.teamTwoDrtg.TabIndex = 15;
+            // 
+            // teamOneDrtg
+            // 
+            this.teamOneDrtg.Location = new System.Drawing.Point(201, 183);
+            this.teamOneDrtg.Name = "teamOneDrtg";
+            this.teamOneDrtg.Size = new System.Drawing.Size(100, 31);
+            this.teamOneDrtg.TabIndex = 14;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 189);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(168, 25);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Defensive rating";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.teamTwoDrtg);
+            this.Controls.Add(this.teamOneDrtg);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.teamTwoCheck);
             this.Controls.Add(this.teamOneCheck);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.submitButton);
-            this.Controls.Add(this.teamTwoWL);
-            this.Controls.Add(this.teamOneWL);
+            this.Controls.Add(this.teamTwoOrtg);
+            this.Controls.Add(this.teamOneOrtg);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.teamTwoDropdown);
             this.Controls.Add(this.label2);
@@ -226,12 +255,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox teamTwoDropdown;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox teamOneWL;
-        private System.Windows.Forms.TextBox teamTwoWL;
+        private System.Windows.Forms.TextBox teamOneOrtg;
+        private System.Windows.Forms.TextBox teamTwoOrtg;
         private System.Windows.Forms.Button submitButton;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox teamOneCheck;
         private System.Windows.Forms.CheckBox teamTwoCheck;
+        private System.Windows.Forms.TextBox teamTwoDrtg;
+        private System.Windows.Forms.TextBox teamOneDrtg;
+        private System.Windows.Forms.Label label5;
     }
 }
 
