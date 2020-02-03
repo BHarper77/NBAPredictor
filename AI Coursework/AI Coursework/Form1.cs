@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RestSharp;
+using RestSharp.Authenticators;
 
 namespace AI_Coursework
 {
@@ -19,9 +21,23 @@ namespace AI_Coursework
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            validate();
-
             if (validate() == true)
+            {
+                RestClientClass restClient = new RestClientClass();
+                string[] teams = new string[2];
+
+                string teamOne = teamOneDropdown.GetItemText(teamOneDropdown.SelectedItem);
+                string teamTwo = teamTwoDropdown.GetItemText(teamTwoDropdown.SelectedItem);
+
+                teams[0] = teamOne;
+                teams[1] = teamTwo;
+
+                string[] data = new string[2];
+
+                data = restClient.getData(teams);
+            }
+
+            /*if (validate() == true)
             {
                 //Creating instance for each team, data will be passed to AI
                 teamData teamOneData = new teamData();
@@ -62,14 +78,12 @@ namespace AI_Coursework
                 teamTwoData.setHome(teamTwoHome);
 
                 main(teamOneData, teamTwoData);
-            }
+            }*/
         }
 
         void main(teamData teamOneData, teamData teamTwoData)
         {
             int teamOneScore, teamTwoScore;
-
-
         }
 
         Boolean validate()
