@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RestSharp;
 using RestSharp.Authenticators;
+using RestSharp.Serializers.Utf8Json;
 
 namespace AI_Coursework
 {
@@ -22,11 +23,9 @@ namespace AI_Coursework
             {
                 var request = new RestRequest(teams[i], DataFormat.Json);
 
-                dynamic json = client.Get(request);
+                dynamic json = client.Execute(request);
 
-                string jsonString = json.toString();
-
-                results[i] = json;
+                client.UseUtf8Json();
             }
 
             return results;

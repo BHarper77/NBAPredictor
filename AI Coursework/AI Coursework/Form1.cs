@@ -88,7 +88,7 @@ namespace AI_Coursework
 
         Boolean validate()
         {
-            if ((teamOneDropdown.SelectedIndex > -1) || (teamTwoDropdown.SelectedIndex > -1)
+            /*if ((teamOneDropdown.SelectedIndex > -1) || (teamTwoDropdown.SelectedIndex > -1)
                 || (string.IsNullOrWhiteSpace(teamOneOrtg.Text)) || (string.IsNullOrWhiteSpace(teamTwoOrtg.Text))
                 || (string.IsNullOrWhiteSpace(teamOneDrtg.Text)) || (string.IsNullOrWhiteSpace(teamTwoDrtg.Text)))
             {
@@ -102,7 +102,7 @@ namespace AI_Coursework
                 MessageBox.Show("Select a home team", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return false;
-            }
+            }*/
 
             return true;
         }
