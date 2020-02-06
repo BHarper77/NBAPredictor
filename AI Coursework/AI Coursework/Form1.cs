@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using RestSharp;
-using RestSharp.Authenticators;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using RestSharp.Serialization.Json;
 
 namespace AI_Coursework
 {
@@ -21,90 +23,33 @@ namespace AI_Coursework
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            if (validate() == true)
-            {
-                RestClientClass restClient = new RestClientClass();
-                string[] teams = new string[2];
+            //Creating new request to API for each team selected by user
+            var client = new RestClient("https://flagrantflop.com/api/");
 
-                string teamOne = teamOneDropdown.GetItemText(teamOneDropdown.SelectedItem);
-                string teamTwo = teamTwoDropdown.GetItemText(teamTwoDropdown.SelectedItem);
+            string[] teams = new string[2];
 
-                teams[0] = teamOne;
-                teams[1] = teamTwo;
+            teams[0] = teamOneDropdown.GetItemText(teamOneDropdown.SelectedItem);
+            teams[1] = teamTwoDropdown.GetItemText(teamTwoDropdown.SelectedItem);
 
-                string[] data = new string[2];
+            #region TeamOne
+            var request = new RestRequest("endpoint.php?api_key=13b6ca7fa0e3cd29255e044b167b01d7&scope=team_stats&season=2019-2020&season_type=regular&team_name=" + teams[0], Method.GET);
+            var response = client.Execute(request);
 
-                data = restClient.getData(teams);
-            }
+            JsonDeserializer deserializer = new JsonDeserializer();
+            string json = deserializer.Deserialize<string>(response);
 
-            /*if (validate() == true)
-            {
-                //Creating instance for each team, data will be passed to AI
-                teamData teamOneData = new teamData();
-                teamData teamTwoData = new teamData();
+            var teamOneData = DataClass.FromJson(json);
+            #endregion
 
-                string teamOne = teamOneDropdown.GetItemText(teamOneDropdown.SelectedItem);
-                string teamTwo = teamTwoDropdown.GetItemText(teamTwoDropdown.SelectedItem);
+            #region TeamTwo
+            var requestTwo = new RestRequest("endpoint.php?api_key=13b6ca7fa0e3cd29255e044b167b01d7&scope=team_stats&season=2019-2020&season_type=regular&team_name=" + teams[1], Method.GET);
+            var responseTwo = client.Execute(requestTwo);
 
-                double teamOneOffRtg = double.Parse(teamOneOrtg.Text);
-                double teamTwoOffRtg = double.Parse(teamTwoOrtg.Text);
+            JsonDeserializer deserializerTwo = new JsonDeserializer();
+            string jsonTwo = deserializerTwo.Deserialize<string>(responseTwo);
 
-                double teamOneDefRtg = double.Parse(teamOneDrtg.Text);
-                double teamTwoDefRtg = double.Parse(teamTwoDrtg.Text);
-
-                Boolean teamOneHome = false;
-                Boolean teamTwoHome = false;
-
-                if (teamOneCheck.Checked)
-                {
-                    teamOneHome = true;
-                    teamTwoHome = false;
-                }
-                else if (teamTwoCheck.Checked)
-                {
-                    teamTwoHome = true;
-                    teamOneHome = false;
-                }
-
-                //Inserting inputted data into class instances
-                teamOneData.setTeamName(teamOne);
-                teamOneData.setOffRating(teamOneOffRtg);
-                teamOneData.setDefRating(teamOneDefRtg);
-                teamOneData.setHome(teamOneHome);
-
-                teamTwoData.setTeamName(teamTwo);
-                teamTwoData.setOffRating(teamTwoOffRtg);
-                teamTwoData.setDefRating(teamTwoDefRtg);
-                teamTwoData.setHome(teamTwoHome);
-
-                main(teamOneData, teamTwoData);
-            }*/
-        }
-
-        void main(teamData teamOneData, teamData teamTwoData)
-        {
-            int teamOneScore, teamTwoScore;
-        }
-
-        Boolean validate()
-        {
-            /*if ((teamOneDropdown.SelectedIndex > -1) || (teamTwoDropdown.SelectedIndex > -1)
-                || (string.IsNullOrWhiteSpace(teamOneOrtg.Text)) || (string.IsNullOrWhiteSpace(teamTwoOrtg.Text))
-                || (string.IsNullOrWhiteSpace(teamOneDrtg.Text)) || (string.IsNullOrWhiteSpace(teamTwoDrtg.Text)))
-            {
-                MessageBox.Show("Missing data", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                return false;
-            }
-
-            if ((!teamOneCheck.Checked) && (!teamTwoCheck.Checked))
-            {
-                MessageBox.Show("Select a home team", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                return false;
-            }*/
-
-            return true;
+            var teamTwoData = DataClass.FromJson(json);
+            #endregion
         }
     }
 }
