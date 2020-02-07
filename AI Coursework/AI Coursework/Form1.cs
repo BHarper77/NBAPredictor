@@ -51,5 +51,18 @@ namespace AI_Coursework
             var teamTwoData = DataClass.FromJson(json);
             #endregion
         }
+
+        public bool validate()
+        {
+            if (teamOneDropdown.SelectedIndex < 0 || teamTwoDropdown.SelectedIndex < 0)
+            {
+                MessageBox.Show("Teams have not been selected correctly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }
