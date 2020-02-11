@@ -48,7 +48,7 @@ namespace AI_Coursework
             JsonDeserializer deserializerTwo = new JsonDeserializer();
             string jsonTwo = deserializerTwo.Deserialize<string>(responseTwo);
 
-            var teamTwoData = DataClass.FromJson(json);
+            var teamTwoData = DataClass.FromJson(jsonTwo);
             #endregion
         }
 
