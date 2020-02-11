@@ -48,10 +48,8 @@ namespace AI_Coursework
             JsonDeserializer deserializerTwo = new JsonDeserializer();
             string jsonTwo = deserializerTwo.Deserialize<string>(responseTwo);
 
-            var teamTwoData = DataClass.FromJson(json);
+            var teamTwoData = DataClass.FromJson(jsonTwo);
             #endregion
-
-            MessageBox.Show("Team 1: " + teamOneData.Data[0].TeamName + "Team 2:" + teamTwoData.Data[0].TeamName);
 
             double[] teamScores = offence(teamOneData, teamTwoData);
 
@@ -65,7 +63,7 @@ namespace AI_Coursework
             }
             else
             {
-                MessageBox.Show("error");
+                MessageBox.Show("Error, try again");
             }
         }
 
@@ -172,6 +170,7 @@ namespace AI_Coursework
             return teamScores;
         }
 
+        //Calcualtes the three point percentage of each team
         public double[] calculateThreePointPercentages(DataClass teamOneData, DataClass teamTwoData)
         {
             string[] splitOneFGAttempts = teamOneData.Data[0].FgAttempted.Split('|');
@@ -203,6 +202,7 @@ namespace AI_Coursework
             return percentages;
         }
 
+        //Validates the input
         public bool validate()
         {
             if (teamOneDropdown.SelectedIndex < 0 || teamTwoDropdown.SelectedIndex < 0)
