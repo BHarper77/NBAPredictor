@@ -51,15 +51,22 @@ namespace AI_Coursework
             var teamTwoData = DataClass.FromJson(jsonTwo);
             #endregion
 
-            double[] teamScores = offence(teamOneData, teamTwoData);
+            double[] teamScoresOffence = offence(teamOneData, teamTwoData);
+            double[] teamScoresDefensive = defence(teamOneData, teamTwoData);
 
-            if (teamScores[0] > teamScores[1])
+            double[] finalScores = new double[2] 
             {
-                MessageBox.Show("Team 1 wins");
+                teamScoresOffence[0] + teamScoresDefensive[0], teamScoresOffence[1] + teamScoresDefensive[1]
+            };
+
+
+            if (finalScores[0] > finalScores[1])
+            {
+                MessageBox.Show(teamOneData.Data[0].TeamName + "wins");
             }
-            else if (teamScores[1] > teamScores[0])
+            else if (finalScores[1] > finalScores[0])
             {
-                MessageBox.Show("Team 2 wins");
+                MessageBox.Show(teamTwoData.Data[0].TeamName + "wins");
             }
             else
             {
@@ -164,6 +171,99 @@ namespace AI_Coursework
             else if (teamTwoRating > teamOneRating)
             {
                 teamScores[1] = teamScores[1] + 0.9;
+            }
+            #endregion
+
+            return teamScores;
+        }
+
+        /*RULE TWO*/
+        double[] defence(DataClass teamOneData, DataClass teamTwoData)
+        {
+            double[] teamScores = new double[2];
+
+            #region Steals
+            string[] splitOneSteals = teamOneData.Data[0].Steals.Split('|');
+            string[] splitTwoSteals = teamTwoData.Data[0].Steals.Split('|');
+
+            int teamOneSteals = int.Parse(splitOneSteals[0]);
+            int teamTwoSteals = int.Parse(splitTwoSteals[0]);
+
+            if (teamOneSteals > teamTwoSteals)
+            {
+                teamScores[0] += 0.5;
+            }
+            else if (teamTwoSteals > teamOneSteals)
+            {
+                teamScores[1] += 0.5;
+            }
+            #endregion
+
+            #region Blocks
+            string[] splitOneBlocks = teamOneData.Data[0].Blocks.Split('|');
+            string[] splitTwoBlocks = teamTwoData.Data[0].Blocks.Split('|');
+
+            int teamOneBlocks = int.Parse(splitOneBlocks[0]);
+            int teamTwoBlocks = int.Parse(splitTwoBlocks[0]);
+
+            if (teamOneBlocks > teamTwoBlocks)
+            {
+                teamScores[0] += 0.6;
+            }
+            else if (teamTwoBlocks > teamOneBlocks)
+            {
+                teamScores[1] += 0.6;
+            }
+            #endregion
+
+            #region Fouls
+            string[] splitOneFouls = teamOneData.Data[0].Fouls.Split('|');
+            string[] splitTwoFouls = teamTwoData.Data[0].Fouls.Split('|');
+
+            int teamOneFouls = int.Parse(splitOneFouls[0]);
+            int teamTwoFouls = int.Parse(splitTwoFouls[0]);
+
+            if (teamOneFouls < teamTwoFouls)
+            {
+                teamScores[0] += 0.7;
+            }
+            else if (teamTwoFouls < teamOneFouls)
+            {
+                teamScores[1] += 0.7;
+            }
+            #endregion
+
+            #region DefensiveRebounds
+            string[] splitOneRebounds = teamOneData.Data[0].DefensiveRebounds.Split('|');
+            string[] splitTwoRebounds = teamTwoData.Data[0].DefensiveRebounds.Split('|');
+
+            int teamOneRebounds = int.Parse(splitOneRebounds[0]);
+            int teamTwoRebounds = int.Parse(splitTwoRebounds[0]);
+
+            if (teamOneRebounds > teamTwoRebounds)
+            {
+                teamScores[0] += 0.8;
+            }
+            else if (teamTwoRebounds > teamOneRebounds)
+            {
+                teamScores[1] += 0.8;
+            }
+            #endregion
+
+            #region DefensiveRating
+            string[] splitOneRating = teamOneData.Data[0].DefensiveRating.Split('|');
+            string[] splitTwoRating = teamTwoData.Data[0].DefensiveRating.Split('|');
+
+            double teamOneRating = int.Parse(splitOneRating[0]);
+            double teamTwoRating = int.Parse(splitTwoRating[0]);
+
+            if (teamOneRating > teamTwoRating)
+            {
+                teamScores[0] += 0.9;
+            }
+            else if (teamTwoRating > teamOneRating)
+            {
+                teamScores[1] += 0.9;
             }
             #endregion
 
