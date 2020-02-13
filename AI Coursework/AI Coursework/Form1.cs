@@ -62,11 +62,27 @@ namespace AI_Coursework
 
             if (finalScores[0] > finalScores[1])
             {
-                MessageBox.Show(teamOneData.Data[0].TeamName + "wins");
+                MessageBox.Show(teamOneData.Data[0].TeamName + " wins");
             }
             else if (finalScores[1] > finalScores[0])
             {
-                MessageBox.Show(teamTwoData.Data[0].TeamName + "wins");
+                MessageBox.Show(teamTwoData.Data[0].TeamName + " wins");
+            }
+            else if (finalScores[0] == finalScores[1])
+            {
+                var random = new Random();
+                int rand = random.Next(0, 1);
+
+                switch (rand)
+                {
+                    case 0:
+                        MessageBox.Show(teamOneData.Data[0].TeamName + " wins");
+                        break;
+
+                    case 1:
+                        MessageBox.Show(teamTwoData.Data[0].TeamName + " wins");
+                        break;
+                }
             }
             else
             {
@@ -254,8 +270,8 @@ namespace AI_Coursework
             string[] splitOneRating = teamOneData.Data[0].DefensiveRating.Split('|');
             string[] splitTwoRating = teamTwoData.Data[0].DefensiveRating.Split('|');
 
-            double teamOneRating = int.Parse(splitOneRating[0]);
-            double teamTwoRating = int.Parse(splitTwoRating[0]);
+            double teamOneRating = double.Parse(splitOneRating[0]);
+            double teamTwoRating = double.Parse(splitTwoRating[0]);
 
             if (teamOneRating > teamTwoRating)
             {
