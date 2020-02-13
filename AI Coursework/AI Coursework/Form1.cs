@@ -62,11 +62,11 @@ namespace AI_Coursework
 
             if (finalScores[0] > finalScores[1])
             {
-                MessageBox.Show(teamOneData.Data[0].TeamName + " wins");
+                MessageBox.Show(teamOneData.Data[0].TeamName + " wins ");
             }
             else if (finalScores[1] > finalScores[0])
             {
-                MessageBox.Show(teamTwoData.Data[0].TeamName + " wins");
+                MessageBox.Show(teamTwoData.Data[0].TeamName + " wins ");
             }
             else if (finalScores[0] == finalScores[1])
             {
@@ -76,11 +76,11 @@ namespace AI_Coursework
                 switch (rand)
                 {
                     case 0:
-                        MessageBox.Show(teamOneData.Data[0].TeamName + " wins");
+                        MessageBox.Show(teamOneData.Data[0].TeamName + " wins (random)");
                         break;
 
                     case 1:
-                        MessageBox.Show(teamTwoData.Data[0].TeamName + " wins");
+                        MessageBox.Show(teamTwoData.Data[0].TeamName + " wins (random)");
                         break;
                 }
             }
