@@ -91,7 +91,7 @@ namespace AI_Coursework
         }
 
         /* RULE ONE*/
-        double[] offence(DataClass teamOneData, DataClass teamTwoData)
+        public double[] offence(DataClass teamOneData, DataClass teamTwoData)
         {
             double[] teamScores = new double[2];
 
@@ -194,7 +194,7 @@ namespace AI_Coursework
         }
 
         /*RULE TWO*/
-        double[] defence(DataClass teamOneData, DataClass teamTwoData)
+        public double[] defence(DataClass teamOneData, DataClass teamTwoData)
         {
             double[] teamScores = new double[2];
 
