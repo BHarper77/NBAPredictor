@@ -59,15 +59,20 @@ namespace AI_Coursework
                 teamScoresOffence[0] + teamScoresDefensive[0], teamScoresOffence[1] + teamScoresDefensive[1]
             };
 
+            //Add advantage for home team
+            double homeAdvantage = 0.2;
+            finalScores[1] += homeAdvantage;
+
 
             if (finalScores[0] > finalScores[1])
             {
-                MessageBox.Show(teamOneData.Data[0].TeamName + " wins ");
+                MessageBox.Show(teamOneData.Data[0].TeamName + " wins");
             }
             else if (finalScores[1] > finalScores[0])
             {
-                MessageBox.Show(teamTwoData.Data[0].TeamName + " wins ");
+                MessageBox.Show(teamTwoData.Data[0].TeamName + " wins");
             }
+            //Last step, if scores are equal, randomly pick a team
             else if (finalScores[0] == finalScores[1])
             {
                 var random = new Random();

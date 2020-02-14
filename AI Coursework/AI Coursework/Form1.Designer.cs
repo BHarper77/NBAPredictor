@@ -88,9 +88,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(488, 24);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(112, 25);
+            this.label2.Size = new System.Drawing.Size(188, 25);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Team Two";
+            this.label2.Text = "Team Two (Home)";
             // 
             // teamTwoDropdown
             // 
