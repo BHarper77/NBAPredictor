@@ -23,75 +23,55 @@ namespace AI_Coursework
 
         private void submitButton_Click(object sender, EventArgs e)
         {
-            //Creating new request to API for each team selected by user
-            var client = new RestClient("https://flagrantflop.com/api/");
-
-            string[] teams = new string[2];
-
-            teams[0] = teamOneDropdown.GetItemText(teamOneDropdown.SelectedItem);
-            teams[1] = teamTwoDropdown.GetItemText(teamTwoDropdown.SelectedItem);
-
-            #region TeamOne            
-            var request = new RestRequest("endpoint.php?api_key=13b6ca7fa0e3cd29255e044b167b01d7&scope=team_stats&season=2019-2020&season_type=regular&team_name=" + teams[0], Method.GET);
-            var response = client.Execute(request);
-
-            JsonDeserializer deserializer = new JsonDeserializer();
-            string json = deserializer.Deserialize<string>(response);
-
-            var teamOneData = DataClass.FromJson(json);
-            #endregion
-
-            #region TeamTwo
-            var requestTwo = new RestRequest("endpoint.php?api_key=13b6ca7fa0e3cd29255e044b167b01d7&scope=team_stats&season=2019-2020&season_type=regular&team_name=" + teams[1], Method.GET);
-            var responseTwo = client.Execute(requestTwo);
-
-            JsonDeserializer deserializerTwo = new JsonDeserializer();
-            string jsonTwo = deserializerTwo.Deserialize<string>(responseTwo);
-
-            var teamTwoData = DataClass.FromJson(jsonTwo);
-            #endregion
-
-            double[] teamScoresOffence = offence(teamOneData, teamTwoData);
-            double[] teamScoresDefensive = defence(teamOneData, teamTwoData);
-
-            double[] finalScores = new double[2] 
+            if (validate() == true)
             {
-                teamScoresOffence[0] + teamScoresDefensive[0], teamScoresOffence[1] + teamScoresDefensive[1]
-            };
+                //Creating new request to API for each team selected by user
+                var client = new RestClient("https://flagrantflop.com/api/");
 
-            //Add advantage for home team
-            double homeAdvantage = 0.2;
-            finalScores[1] += homeAdvantage;
+                string[] teams = new string[2];
 
+                teams[0] = teamOneDropdown.GetItemText(teamOneDropdown.SelectedItem);
+                teams[1] = teamTwoDropdown.GetItemText(teamTwoDropdown.SelectedItem);
 
-            if (finalScores[0] > finalScores[1])
-            {
-                MessageBox.Show(teamOneData.Data[0].TeamName + " wins");
-            }
-            else if (finalScores[1] > finalScores[0])
-            {
-                MessageBox.Show(teamTwoData.Data[0].TeamName + " wins");
-            }
-            //Last step, if scores are equal, randomly pick a team
-            else if (finalScores[0] == finalScores[1])
-            {
-                var random = new Random();
-                int rand = random.Next(0, 1);
+                #region TeamOne            
+                var request = new RestRequest("endpoint.php?api_key=13b6ca7fa0e3cd29255e044b167b01d7&scope=team_stats&season=2019-2020&season_type=regular&team_name=" + teams[0], Method.GET);
+                var response = client.Execute(request);
 
-                switch (rand)
+                JsonDeserializer deserializer = new JsonDeserializer();
+                string json = deserializer.Deserialize<string>(response);
+
+                var teamOneData = DataClass.FromJson(json);
+                #endregion
+
+                #region TeamTwo
+                var requestTwo = new RestRequest("endpoint.php?api_key=13b6ca7fa0e3cd29255e044b167b01d7&scope=team_stats&season=2019-2020&season_type=regular&team_name=" + teams[1], Method.GET);
+                var responseTwo = client.Execute(requestTwo);
+
+                JsonDeserializer deserializerTwo = new JsonDeserializer();
+                string jsonTwo = deserializerTwo.Deserialize<string>(responseTwo);
+
+                var teamTwoData = DataClass.FromJson(jsonTwo);
+                #endregion
+                              
+                //Running rules and setting results to finalScores array
+                double[] teamScoresOffence = offence(teamOneData, teamTwoData);
+                double[] teamScoresDefensive = defence(teamOneData, teamTwoData);
+
+                double[] finalScores = new double[2]
                 {
-                    case 0:
-                        MessageBox.Show(teamOneData.Data[0].TeamName + " wins (random)");
-                        break;
+                    teamScoresOffence[0] + teamScoresDefensive[0], teamScoresOffence[1] + teamScoresDefensive[1]
+                };
 
-                    case 1:
-                        MessageBox.Show(teamTwoData.Data[0].TeamName + " wins (random)");
-                        break;
+                //Add advantage for home team
+                double homeAdvantage = 0.2;
+                finalScores[1] += homeAdvantage;
+
+                if (fuzzyLogicCheck.Checked)
+                {
+                    fuzzyLogic(finalScores);
                 }
-            }
-            else
-            {
-                MessageBox.Show("Error, try again");
+
+                outputResults(finalScores, teamOneData, teamTwoData);
             }
         }
 
@@ -291,6 +271,39 @@ namespace AI_Coursework
             return teamScores;
         }
 
+        public void outputResults(double[] finalScores, DataClass teamOneData, DataClass teamTwoData)
+        {
+            if (finalScores[0] > finalScores[1])
+            {
+                MessageBox.Show(teamOneData.Data[0].TeamName + " wins");
+            }
+            else if (finalScores[1] > finalScores[0])
+            {
+                MessageBox.Show(teamTwoData.Data[0].TeamName + " wins");
+            }
+            //Last step, if scores are equal, randomly pick a team
+            else if (finalScores[0] == finalScores[1])
+            {
+                var random = new Random();
+                int rand = random.Next(0, 1);
+
+                switch (rand)
+                {
+                    case 0:
+                        MessageBox.Show(teamOneData.Data[0].TeamName + " wins (random)");
+                        break;
+
+                    case 1:
+                        MessageBox.Show(teamTwoData.Data[0].TeamName + " wins (random)");
+                        break;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error, try again");
+            }
+        }
+
         //Calcualtes the three point percentage of each team
         public double[] calculateThreePointPercentages(DataClass teamOneData, DataClass teamTwoData)
         {
@@ -321,6 +334,11 @@ namespace AI_Coursework
             percentages[1] = twoThreePercentage;
 
             return percentages;
+        }
+
+        public void fuzzyLogic(double[] finalScores)
+        {
+
         }
 
         //Validates the input
