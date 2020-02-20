@@ -63,7 +63,7 @@ namespace AI_Coursework
                 };
 
                 //Add advantage for home team
-                double homeAdvantage = 0.2;
+                double homeAdvantage = 0.18;
                 finalScores[1] += homeAdvantage;
 
                 if (fuzzyLogicCheck.Checked)
@@ -131,13 +131,40 @@ namespace AI_Coursework
             #region 3pt Percentage
             double[] teamThreePercentages = calculateThreePointPercentages(teamOneData, teamTwoData);
 
+            #region AttemptsCalculations
+            string[] splitOneFGAttempts = teamOneData.Data[0].FgAttempted.Split('|');
+            string[] splitOneTwoAttempts = teamOneData.Data[0].TpfgAttempted.Split('|');
+
+            string[] splitTwoFGAttempts = teamTwoData.Data[0].FgAttempted.Split('|');
+            string[] splitTwoTwoAttempts = teamTwoData.Data[0].TpfgAttempted.Split('|');
+
+            int teamOneThreeAttempts = (int.Parse(splitOneFGAttempts[0]) - int.Parse(splitOneTwoAttempts[0]));
+            int teamTwoThreeAttempts = (int.Parse(splitTwoFGAttempts[0]) - int.Parse(splitTwoTwoAttempts[0]));
+            #endregion
+
             if (teamThreePercentages[0] > teamThreePercentages[1])
             {
-                teamScores[0] += 0.8;
+                //Smaller advantage if attempts are high
+                if (Math.Abs(teamTwoThreeAttempts - teamOneThreeAttempts) > 6)
+                {
+                    teamScores[0] += 0.6;
+                }
+                else
+                {
+                    teamScores[0] += 0.8;
+                }
             }
             else if (teamThreePercentages[1] > teamThreePercentages[0])
             {
-                teamScores[1] += 0.8;
+                //Smaller advantage if attempts are high
+                if (Math.Abs(teamOneThreeAttempts - teamTwoThreeAttempts) > 6)
+                {
+                    teamScores[1] += 0.6;
+                }
+                else
+                {
+                    teamScores[1] += 0.8;
+                }
             }
             #endregion
 
@@ -145,16 +172,33 @@ namespace AI_Coursework
             string[] splitOneFT = teamOneData.Data[0].FtPercentage.Split('|');
             string[] splitTwoFT = teamTwoData.Data[0].FtPercentage.Split('|');
 
+            string[] splitOneFTAttempts = teamOneData.Data[0].FtAttempted.Split('|');
+            string[] splitTwoFTAttempts = teamTwoData.Data[0].FtAttempted.Split('|');
+
             double teamOneFT = double.Parse(splitOneFT[0]);
             double teamTwoFT = double.Parse(splitTwoFT[0]);
 
             if (teamOneFT > teamTwoFT)
             {
-                teamScores[0] += 0.6;
+                if (Math.Abs(int.Parse(splitOneFTAttempts[0]) - int.Parse(splitTwoFTAttempts[0])) > 5)
+                {
+                    teamScores[0] += 0.45;
+                }
+                else
+                {
+                    teamScores[0] += 0.6;
+                }
             }
             else if (teamTwoFT > teamOneFT)
             {
-                teamScores[1] += 0.6;
+                if (Math.Abs(int.Parse(splitTwoFTAttempts[0]) - int.Parse(splitOneFTAttempts[0])) > 5)
+                {
+                    teamScores[1] += 0.45;
+                }
+                else
+                {
+                    teamScores[1] += 0.6;
+                }
             }
             #endregion
 

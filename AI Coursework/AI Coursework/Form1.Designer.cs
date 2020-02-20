@@ -70,15 +70,15 @@
             "Toronto Raptors",
             "Utah Jazz",
             "Washington Wizards"});
-            this.teamOneDropdown.Location = new System.Drawing.Point(201, 84);
+            this.teamOneDropdown.Location = new System.Drawing.Point(152, 88);
             this.teamOneDropdown.Name = "teamOneDropdown";
-            this.teamOneDropdown.Size = new System.Drawing.Size(121, 33);
+            this.teamOneDropdown.Size = new System.Drawing.Size(192, 33);
             this.teamOneDropdown.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(196, 24);
+            this.label1.Location = new System.Drawing.Point(147, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(112, 25);
             this.label1.TabIndex = 1;
@@ -87,7 +87,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(488, 24);
+            this.label2.Location = new System.Drawing.Point(439, 28);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(188, 25);
             this.label2.TabIndex = 3;
@@ -127,9 +127,9 @@
             "Toronto Raptors",
             "Utah Jazz",
             "Washington Wizards"});
-            this.teamTwoDropdown.Location = new System.Drawing.Point(493, 84);
+            this.teamTwoDropdown.Location = new System.Drawing.Point(444, 88);
             this.teamTwoDropdown.Name = "teamTwoDropdown";
-            this.teamTwoDropdown.Size = new System.Drawing.Size(121, 33);
+            this.teamTwoDropdown.Size = new System.Drawing.Size(192, 33);
             this.teamTwoDropdown.TabIndex = 4;
             // 
             // submitButton
