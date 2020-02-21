@@ -68,7 +68,8 @@ namespace AI_Coursework
 
                 if (fuzzyLogicCheck.Checked)
                 {
-                    fuzzyLogic(finalScores);
+                    FuzzyLogic fuzzyLogic = new FuzzyLogic();
+                    fuzzyLogic.fuzzify(finalScores);
                 }
 
                 outputResults(finalScores, teamOneData, teamTwoData);
@@ -378,11 +379,6 @@ namespace AI_Coursework
             percentages[1] = twoThreePercentage;
 
             return percentages;
-        }
-
-        public void fuzzyLogic(double[] finalScores)
-        {
-
         }
 
         //Validates the input
