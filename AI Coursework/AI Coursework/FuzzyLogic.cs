@@ -27,8 +27,8 @@ namespace AI_Coursework
             IFuzzyEngine fuzzyEngine = new FuzzyEngineFactory().Default();
 
             //Create and add rules
-            var rule1 = Rule.If(diff.Is(low)).Then(winSize.Is(low));
-            var rule2 = Rule.If(diff.Is(medium)).Then(winSize.Is(medium));
+            var rule1 = Rule.If(diff.Is(low)).Then(winSize.Is(close));
+            var rule2 = Rule.If(diff.Is(medium)).Then(winSize.Is(small));
             var rule3 = Rule.If(diff.Is(high)).Then(winSize.Is(big));
             fuzzyEngine.Rules.Add(rule1, rule2, rule3);
 
