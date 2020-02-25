@@ -68,8 +68,12 @@ namespace AI_Coursework
 
                 if (fuzzyLogicCheck.Checked)
                 {
+                    //Get difference in scores from perspective of winning team
+                    double diff = Math.Abs(finalScores.Max() - finalScores.Min());
+
+                    //Start fuzzy system, send value 
                     FuzzyLogic fuzzyLogic = new FuzzyLogic();
-                    fuzzyLogic.fuzzify(finalScores);
+                    fuzzyLogic.fuzzify(diff);
                 }
 
                 outputResults(finalScores, teamOneData, teamTwoData);
