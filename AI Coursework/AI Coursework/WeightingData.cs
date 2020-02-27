@@ -30,7 +30,5 @@ namespace AI_Coursework
 
         public const double totalPossiblePoints = pace + assists + offensiveRebounds + threePointPercentage + ftPercentage + offensiveRating + 
                                      steals + blocks + fouls + defensiveRebounds + defensiveRating;
-
-        //public double getTotalPossiblePoints() { return totalPossiblePoints; }
     }
 }
