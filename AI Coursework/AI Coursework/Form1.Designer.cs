@@ -33,7 +33,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.teamTwoDropdown = new System.Windows.Forms.ComboBox();
             this.submitButton = new System.Windows.Forms.Button();
-            this.fuzzyLogicCheck = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // teamOneDropdown
@@ -142,22 +141,11 @@
             this.submitButton.UseVisualStyleBackColor = true;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
             // 
-            // fuzzyLogicCheck
-            // 
-            this.fuzzyLogicCheck.AutoSize = true;
-            this.fuzzyLogicCheck.Location = new System.Drawing.Point(201, 217);
-            this.fuzzyLogicCheck.Name = "fuzzyLogicCheck";
-            this.fuzzyLogicCheck.Size = new System.Drawing.Size(216, 29);
-            this.fuzzyLogicCheck.TabIndex = 9;
-            this.fuzzyLogicCheck.Text = "Use Fuzzy Logic?";
-            this.fuzzyLogicCheck.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.fuzzyLogicCheck);
             this.Controls.Add(this.submitButton);
             this.Controls.Add(this.teamTwoDropdown);
             this.Controls.Add(this.label2);
@@ -176,7 +164,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox teamTwoDropdown;
         private System.Windows.Forms.Button submitButton;
-        private System.Windows.Forms.CheckBox fuzzyLogicCheck;
     }
 }
 

@@ -66,17 +66,14 @@ namespace AI_Coursework
                 double homeAdvantage = 0.18;
                 finalScores[1] += homeAdvantage;
 
-                if (fuzzyLogicCheck.Checked)
-                {
-                    //Get difference in scores from perspective of winning team
-                    double diff = Math.Abs(finalScores.Max() - finalScores.Min());
+                //Get difference in scores from perspective of winning team
+                double diff = Math.Abs(finalScores.Max() - finalScores.Min());
 
-                    //Start fuzzy system, send value 
-                    FuzzyLogic fuzzyLogic = new FuzzyLogic();
-                    fuzzyLogic.fuzzify(diff);
-                }
+                //Start fuzzy system, send value 
+                FuzzyLogic fuzzyLogic = new FuzzyLogic();
+                double fuzzyResult = fuzzyLogic.fuzzify(diff);
 
-                outputResults(finalScores, teamOneData, teamTwoData);
+                outputResults(finalScores, teamOneData, teamTwoData, fuzzyResult);
             }
         }
 
@@ -320,17 +317,17 @@ namespace AI_Coursework
             return teamScores;
         }
 
-        public void outputResults(double[] finalScores, DataClass teamOneData, DataClass teamTwoData)
+        public void outputResults(double[] finalScores, DataClass teamOneData, DataClass teamTwoData, double fuzzyResult)
         {
             if (finalScores[0] > finalScores[1])
             {
-                MessageBox.Show(teamOneData.Data[0].TeamName + " wins");
+                MessageBox.Show(teamOneData.Data[0].TeamName + " wins by " + fuzzyResult + " points");
             }
             else if (finalScores[1] > finalScores[0])
             {
-                MessageBox.Show(teamTwoData.Data[0].TeamName + " wins");
+                MessageBox.Show(teamTwoData.Data[0].TeamName +" wins by " + fuzzyResult + " points");
             }
-            //Last step, if scores are equal, randomly pick a team
+            //If scores are equal, randomly pick a team
             else if (finalScores[0] == finalScores[1])
             {
                 var random = new Random();
@@ -339,11 +336,11 @@ namespace AI_Coursework
                 switch (rand)
                 {
                     case 0:
-                        MessageBox.Show(teamOneData.Data[0].TeamName + " wins (random)");
+                        MessageBox.Show(teamOneData.Data[0].TeamName + " wins (random) by " + fuzzyResult + " points");
                         break;
 
                     case 1:
-                        MessageBox.Show(teamTwoData.Data[0].TeamName + " wins (random)");
+                        MessageBox.Show(teamTwoData.Data[0].TeamName + " wins (random) by " + fuzzyResult + " points");
                         break;
                 }
             }
