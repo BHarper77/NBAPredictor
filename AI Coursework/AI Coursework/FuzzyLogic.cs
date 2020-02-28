@@ -14,11 +14,11 @@ namespace AI_Coursework
         {
             double points = WeightingData.totalPossiblePoints;
 
-            //Declaring linguistic variable for input membership function
+            //Declaring linguistic variable for input membership function, using points to create dynamic function
             var diff = new LinguisticVariable("diff");
-            var low = diff.MembershipFunctions.AddTrapezoid("low", 0, 0, (points / 4), (points / 2));
-            var medium = diff.MembershipFunctions.AddTriangle("medium", (points / 4), (points / 2), (points - (points / 4)));
-            var high = diff.MembershipFunctions.AddTrapezoid("high", (points / 2), (points - (points / 4)), points, points);
+            var low = diff.MembershipFunctions.AddTrapezoid("low", 0, 0, (points * 0.1), (points *0.2));
+            var medium = diff.MembershipFunctions.AddTriangle("medium", (points * 0.1), (points * 0.25), (points - (points / 4)));
+            var high = diff.MembershipFunctions.AddTrapezoid("high", (points / 0.3), (points - (points / 0.4)), points, points);
 
             //Membership function for output
             var winSize = new LinguisticVariable("winSize");
