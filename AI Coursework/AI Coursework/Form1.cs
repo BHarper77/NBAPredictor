@@ -390,10 +390,14 @@ namespace AI_Coursework
                 MessageBox.Show("Teams have not been selected correctly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else
+
+            if (teamOneDropdown.SelectedIndex == teamTwoDropdown.SelectedIndex)
             {
-                return true;
+                MessageBox.Show("Selected teams are the same", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
+
+            return true;
         }
     }
 }
