@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FLS;
 using FLS.Rules;
 
+
 namespace AI_Coursework
 {
     class FuzzyLogic
@@ -18,7 +19,7 @@ namespace AI_Coursework
             var diff = new LinguisticVariable("diff");
             var low = diff.MembershipFunctions.AddTrapezoid("low", 0, 0, (points * 0.1), (points *0.2));
             var medium = diff.MembershipFunctions.AddTriangle("medium", (points * 0.1), (points * 0.25), (points - (points / 4)));
-            var high = diff.MembershipFunctions.AddTrapezoid("high", (points / 0.3), (points - (points / 0.4)), points, points);
+            var high = diff.MembershipFunctions.AddTrapezoid("high", (points * 0.3), (points - (points / 4)), points, points);
 
             //Membership function for output
             var winSize = new LinguisticVariable("winSize");
