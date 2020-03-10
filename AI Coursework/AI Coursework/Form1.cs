@@ -33,6 +33,7 @@ namespace AI_Coursework
                 teams[0] = teamOneDropdown.GetItemText(teamOneDropdown.SelectedItem);
                 teams[1] = teamTwoDropdown.GetItemText(teamTwoDropdown.SelectedItem);
 
+                //Requesting team data
                 #region TeamOne            
                 var request = new RestRequest("endpoint.php?api_key=13b6ca7fa0e3cd29255e044b167b01d7&scope=team_stats&season=2019-2020&season_type=regular&team_name=" + teams[0], Method.GET);
                 var response = client.Execute(request);
@@ -53,7 +54,7 @@ namespace AI_Coursework
                 var teamTwoData = DataClass.FromJson(jsonTwo);
                 #endregion
                               
-                //Running rules and setting results to finalScores array
+                //Run rules
                 double[] teamScoresOffence = offence(teamOneData, teamTwoData);
                 double[] teamScoresDefensive = defence(teamOneData, teamTwoData);
 
@@ -62,7 +63,6 @@ namespace AI_Coursework
                     teamScoresOffence[0] + teamScoresDefensive[0], teamScoresOffence[1] + teamScoresDefensive[1]
                 };
 
-                //Add advantage for home team
                 double homeAdvantage = 0.18;
                 finalScores[1] += homeAdvantage;
 
@@ -78,6 +78,7 @@ namespace AI_Coursework
         }
 
         /* RULE ONE*/
+        /* Using all relevant offensive stats to calculate superior offensive team, regions outline which stats are used */
         public double[] offence(DataClass teamOneData, DataClass teamTwoData)
         {
             double[] teamScores = new double[2];
@@ -133,6 +134,7 @@ namespace AI_Coursework
             #region 3pt Percentage
             double[] teamThreePercentages = calculateThreePointPercentages(teamOneData, teamTwoData);
 
+            //Calculating number of attempts, API doesn't supply that stat by default
             #region AttemptsCalculations
             string[] splitOneFGAttempts = teamOneData.Data[0].FgAttempted.Split('|');
             string[] splitOneTwoAttempts = teamOneData.Data[0].TpfgAttempted.Split('|');
@@ -158,7 +160,6 @@ namespace AI_Coursework
             }
             else if (teamThreePercentages[1] > teamThreePercentages[0])
             {
-                //Smaller advantage if attempts are high
                 if (Math.Abs(teamOneThreeAttempts - teamTwoThreeAttempts) > 6)
                 {
                     teamScores[1] += 0.6;
@@ -182,6 +183,7 @@ namespace AI_Coursework
 
             if (teamOneFT > teamTwoFT)
             {
+                //Weighting is lower if attempts are high
                 if (Math.Abs(int.Parse(splitOneFTAttempts[0]) - int.Parse(splitTwoFTAttempts[0])) > 5)
                 {
                     teamScores[0] += 0.45;
@@ -225,6 +227,7 @@ namespace AI_Coursework
         }
 
         /*RULE TWO*/
+        /* Using all relevant defensive stats to calculate superior defensive team, regions outline which stats are used */
         public double[] defence(DataClass teamOneData, DataClass teamTwoData)
         {
             double[] teamScores = new double[2];
@@ -350,7 +353,6 @@ namespace AI_Coursework
             }
         }
 
-        //Calcualtes the three point percentage of each team
         public double[] calculateThreePointPercentages(DataClass teamOneData, DataClass teamTwoData)
         {
             string[] splitOneFGAttempts = teamOneData.Data[0].FgAttempted.Split('|');
@@ -382,7 +384,6 @@ namespace AI_Coursework
             return percentages;
         }
 
-        //Validates the input
         public bool validate()
         {
             if (teamOneDropdown.SelectedIndex < 0 || teamTwoDropdown.SelectedIndex < 0)

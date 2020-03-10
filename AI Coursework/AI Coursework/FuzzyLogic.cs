@@ -30,14 +30,13 @@ namespace AI_Coursework
 
             IFuzzyEngine fuzzyEngine = new FuzzyEngineFactory().Default();
 
-            //Create and add rules
+            //Rules
             var rule1 = Rule.If(diff.Is(low)).Then(winSize.Is(close));
             var rule2 = Rule.If(diff.Is(medium)).Then(winSize.Is(small));
             var rule3 = Rule.If(diff.Is(high)).Then(winSize.Is(big));
             var rule4 = Rule.If(diff.Is(blowout)).Then(winSize.Is(big));
             fuzzyEngine.Rules.Add(rule1, rule2, rule3, rule4);
 
-            //Get result using the diff between two scores
             var result = fuzzyEngine.Defuzzify(new { diff = value });
 
             return Math.Round(result);
